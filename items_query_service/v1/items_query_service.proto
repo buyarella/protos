@@ -4,26 +4,31 @@ package buyarella.items.query;
 
 import "models/v1/models.proto";
 
-option go_package = "v1";
+option go_package = "pkg/api";
 
 service ItemsQueries {
-    rpc GetAllItemsToBuy(GetAllItemsToBuyRequest) returns (GetAllItemsToBuyResponse) {}
+    rpc GetAllShoppingLists(GetAllShoppingListsRequest) returns (GetAllShoppingListsResponse) {}
+    rpc GetShoppingList(GetShoppingListRequest) returns (buyarella.ShoppingList) {}
     rpc GetAllItems(GetAllItemsRequest) returns (GetAllItemsResponse) {}
 }
 
-message GetAllItemsToBuyRequest {
-    ItemsToBuyFilter filter = 1;
+message GetAllShoppingListsRequest {
+    ShoppingListFilter filter = 1;
     int32 page_size = 2;
     string page_token = 3;
 }
 
-message ItemsToBuyFilter {
-
+message GetAllShoppingListsResponse {
+    repeated buyarella.ShoppingList items_to_buy = 1;
+    string next_page_token = 2;
 }
 
-message GetAllItemsToBuyResponse {
-    repeated buyarella.ToBuy items_to_buy = 1;
-    string next_page_token = 2;
+message GetShoppingListRequest {
+    string name = 1;
+}
+
+message ShoppingListFilter {
+
 }
 
 message GetAllItemsRequest {

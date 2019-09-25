@@ -4,41 +4,62 @@ package buyarella;
 
 import "google/protobuf/timestamp.proto";
 
-option go_package = "github.com/buyarella/models/v1";
+option go_package = "pkg/api";
 
-message ToBuy {
-    string id = 1;
-    string name = 2;
+message ShoppingList {
+    string name = 1;
+    string display_name = 2;
 
-    google.protobuf.Timestamp create_time = 3;
-    google.protobuf.Timestamp update_time = 4;
-    google.protobuf.Timestamp bought_time = 5;
-    google.protobuf.Timestamp removed_time = 6;
-
-    Item item = 7;
-    int32 count = 8;
-    User requestor = 9;
-    
-    Vendor vendor = 10;
-}
-
-message Item {
-    string id = 1;
-    string name = 2;
-    string display_name = 3;
-    string image_url = 4;
-}
-
-message Vendor {
-    string id = 1;
-    string name = 2;
-    string display_name = 3;
+    repeated ShoppingListEntry entries = 3;
 
     google.protobuf.Timestamp create_time = 4;
     google.protobuf.Timestamp update_time = 5;
 
-    float price = 7;
-    Currency currency = 8;
+    User creator = 6;
+}
+
+message ShoppingListEntry  {
+    string name = 1;
+
+    google.protobuf.Timestamp create_time = 2;
+    google.protobuf.Timestamp update_time = 3;
+    google.protobuf.Timestamp bought_time = 4;
+    google.protobuf.Timestamp removed_time = 5;
+
+    Item item = 7;
+    Amount amount = 8;
+    User requestor = 9;
+    
+    Offering offering = 10;
+}
+
+message Item {
+    string name = 1;
+    string display_name = 2;
+    string image_url = 3;
+}
+
+message Amount {
+    int32 count = 1;
+    Unit unit = 2;    
+}
+
+message Offering {
+    string name = 1;
+    Item item = 2;
+    Vendor vendor = 3;
+
+    float price = 4;
+    Currency currency = 5;
+    Amount per = 6;
+}
+
+message Vendor {
+    string name = 1;
+    string display_name = 2;
+
+    google.protobuf.Timestamp create_time = 3;
+    google.protobuf.Timestamp update_time = 4;
 }
 
 enum Currency {
@@ -47,10 +68,16 @@ enum Currency {
     US_DOLLAR = 2;
 }
 
+enum Unit {
+    PIECES = 0;
+    KILO_GRAMM = 1;
+    GRAMM = 2;
+    METER = 3;
+}
+
 message User {
-    string id = 1;
-    string name = 2;
-    string email = 3;
-    string fistname = 4;
-    string lastname = 5;
+    string name = 1;
+    string email = 2;
+    string fistname = 3;
+    string lastname = 4;
 }
