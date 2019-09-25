@@ -1,12 +1,12 @@
 syntax = "proto3";
 
-package buyarella.items.query;
+package buyarella.shoppinglist.query;
 
 import "models/v1/models.proto";
 
 option go_package = "pkg/api";
 
-service ItemsQueries {
+service ShoppingListQueries {
     rpc GetAllShoppingLists(GetAllShoppingListsRequest) returns (GetAllShoppingListsResponse) {}
     rpc GetShoppingList(GetShoppingListRequest) returns (buyarella.ShoppingList) {}
     rpc GetAllItems(GetAllItemsRequest) returns (GetAllItemsResponse) {}
