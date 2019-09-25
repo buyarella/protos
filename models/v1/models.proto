@@ -1,0 +1,56 @@
+syntax = "proto3";
+
+package buyarella;
+
+import "google/protobuf/timestamp.proto";
+
+option go_package = "github.com/buyarella/models/v1";
+
+message ToBuy {
+    string id = 1;
+    string name = 2;
+
+    google.protobuf.Timestamp create_time = 3;
+    google.protobuf.Timestamp update_time = 4;
+    google.protobuf.Timestamp bought_time = 5;
+    google.protobuf.Timestamp removed_time = 6;
+
+    Item item = 7;
+    int32 count = 8;
+    User requestor = 9;
+    
+    Vendor vendor = 10;
+}
+
+message Item {
+    string id = 1;
+    string name = 2;
+    string display_name = 3;
+    string image_url = 4;
+}
+
+message Vendor {
+    string id = 1;
+    string name = 2;
+    string display_name = 3;
+
+    google.protobuf.Timestamp create_time = 4;
+    google.protobuf.Timestamp update_time = 5;
+
+    float price = 7;
+    Currency currency = 8;
+}
+
+enum Currency {
+    EURO = 0;
+    POUND = 1;
+    US_DOLLAR = 2;
+}
+
+message User {
+    string id = 1;
+    string name = 2;
+    string email = 3;
+    string fistname = 4;
+    string lastname = 5;
+}
