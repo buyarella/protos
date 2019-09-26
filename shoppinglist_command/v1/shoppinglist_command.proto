@@ -1,0 +1,40 @@
+syntax = "proto3";
+
+package buyarella.shoppinglist.command;
+
+import "models/v1/models.proto";
+
+option go_package = "pkg/api";
+
+service ShoppingListCommands {
+    rpc NewShoppingList(NewShoppingListRequest) returns (buyarella.ShoppingList) {}
+    rpc SetActiveShoppingList(SetActiveShoppingListRequest) returns (buyarella.ShoppingList) {}
+    rpc FinishShopping(FinishShoppingRequest) returns (FinishShoppingResponse) {}
+    rpc AddNewItem(AddNewItemRequest) returns (buyarella.Item) {}
+    rpc AddItemToShoppingList(AddItemToShoppingListRequest) returns (buyarella.ShoppingList) {}
+}
+
+message NewShoppingListRequest {
+    buyarella.ShoppingList new_shopping_list = 1;
+}
+
+message SetActiveShoppingListRequest {
+    string active_shoppingList_name = 1;
+}
+
+message FinishShoppingRequest {
+    buyarella.ShoppingList updated_shopping_list = 1;
+}
+
+message FinishShoppingResponse {
+    buyarella.ShoppingList shopping_list = 1;
+}
+
+message AddNewItemRequest {
+    buyarella.Item item_to_add = 1;
+}
+
+message AddItemToShoppingListRequest {
+    buyarella.Item item_to_add = 1;
+    buyarella.ShoppingList shopping_list = 2;
+}
