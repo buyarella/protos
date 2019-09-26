@@ -16,6 +16,7 @@ message ShoppingList {
     google.protobuf.Timestamp update_time = 5;
 
     User creator = 6;
+    repeated User shared_with = 7;
 }
 
 message ShoppingListEntry  {
