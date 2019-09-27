@@ -20,7 +20,7 @@ message GetAllShoppingListsRequest {
 }
 
 message GetAllShoppingListsResponse {
-    repeated buyarella.ShoppingList items_to_buy = 1;
+    repeated buyarella.ShoppingList shopping_lists = 1;
     string next_page_token = 2;
 }
 
